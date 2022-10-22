@@ -1,20 +1,19 @@
-<h1 class= 'main-text align-text-center'>Public Recipes<h1>
+<h1 class= 'text-center mt-3 mb-3'>Public Recipes<h1>
 <% @recipes.each do |recipe, index|%>
-  <div class='card'>
-    <div class="flex justify-content-sa font-size-pr">
-      <div>
-        <p class='has-text-weight-bold is-size-4'>
-          <%= link_to recipe.name, recipe_path(id:recipe.id), class: 'text' %>
-        </p>
-        <p class='has-text-weight-semibold is-size-5'>By: <%= recipe.user.name%></p>
-      </div>
-      <% @recipe_foods = RecipeFood.joins(:food, :recipe).where(food: { user: recipe.user_id }, recipe: { user: recipe.user_id }) %>
-      <% @total_items = @recipe_foods.where(recipe_id: recipe.id).count %>
-      <% @total_cost = @recipe_foods.where(recipe_id: recipe.id).sum('quantity*price') %>
-      <div>
-        <p>Total food items: <%= @total_items%></p>
-        <p>Total price: $<%= @total_cost %></p>
-      </div>
+  <div class='card mt-2'>
+    <div class=card-body>
+        <h5 class='card-title'>
+          <%= link_to recipe.name, recipe_path(id:recipe.id), class: 'text-decoration-none' %>
+        </h5>
+        <h6 class='card-subtitle'>By: <%= recipe.user.name%></h6>
+        <% @recipe_foods = RecipeFood.joins(:food, :recipe).where(food: { user: recipe.user_id }, recipe: { user: recipe.user_id }) %>
+        <% @total_items = @recipe_foods.where(recipe_id: recipe.id).count %>
+        <% @total_cost = @recipe_foods.where(recipe_id: recipe.id).sum('quantity*price') %>
+        <p class="card-text fs-4 mt-2"><%= recipe.description%></p>
     </div>
+        <div class="card-footer">
+          <p class="fs-5">Total food items: <%= @total_items%></p>
+          <p class="fs-5">Total price: <%= number_to_currency @total_cost %></p>
+        </div>
   </div>
 <%end%>

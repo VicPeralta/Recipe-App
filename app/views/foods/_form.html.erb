@@ -1,24 +1,24 @@
-<div class="margin-top-nav flex-column align-items margin-top-nav">
-<h2 class="center_content margin-bottom-login">Create a new food</h2>
+<h2 class="text-center">Create a new food</h2>
 <%= form_with scope: :food, url: foods_path, method: :post  do |form| %>
-  <div class="form-group">
-    <label for="name">Name</label><br>
-    <%= form.text_field :name, required: true, autofocus: true %>
+  <div class="mb-3">
+    <%= form.label :name,class:"form-label" %>
+    <%= form.text_field :name, required: true, autofocus: true, class:"form-control" %>
   </div>
-  <div class="form-group">
-    <label for="measurement_unit">Measurement unit</label><br>
-    <%= form.text_field :measurementUnit, required: true %>
+  <div class="mb-3">
+    <%= form.label :name,"Measurement unit",class:"form-label" %>
+    <%= form.text_field :measurementUnit, required: true, class:"form-control" %>
   </div>
-  <div class="form-group">
-    <label for="price">Price</label><br>
-    <%= form.text_field :price, required: true, type: "number", step: "0.01", value: 0.1, id: "price_input" %>
+  <div class="mb-3">
+   <%= form.label :price,class:"form-label" %>
+    <%= form.text_field :price, required: true, type: "number", 
+    step: "0.01", value: 0.1, id: "price_input",
+    class:"form-control" %>
   </div>
 <br>
 <%= form.submit 'Save food', :class => 'btn btn-primary' %>
 <%= link_to 'Back', url_for(:back), :class => 'btn btn-secondary float-right' %>
 <% end %>
 
-</div>
 
 <% if flash[:notice] %>
     <div class="alert-pos" id="notice"><%= flash[:notice] %></div>

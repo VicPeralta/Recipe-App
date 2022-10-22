@@ -2,37 +2,41 @@
 
 # Recipe App 
 
-> Recipe App is a web application that allows users to create, and delete recipes, foods, and ingredients.
+> Recipe App is a web application that allows users to create, and manage recipes, foods, and ingredients.
 
 ## Built With 
 
 - Ruby
 - Ruby On Rails
-- Ruby Gems
 - PostgreSQL
-- Rubocop
+- Redis
+- Bootstrap
+
+## Demo   
+![](./recipeApp.gif)
+
+For a live demo visit [here](https://thawing-bastion-63884.herokuapp.com/) (if available)
 
 ## Getting Started
 
-To get a local copy up and running follow these simple example steps.
+To get a local copy up and running follow these simple example steps
 
 ### Prerequisites 📌
 - `Ruby`
 - `Ruby on Rails` 
-- `Ruby Gems` 
-- `PostgreSQL`
+- `PostgreSQL`   
+- `Redis`
 ### Setup 🔂 
-- Clone the repository using this [GitHub](https://github.com/mateo951/Recipe-App.git) link.
-- `cd` into the directory. 
+- Clone the repository using this [GitHub](git@github.com:VicPeralta/Recipe-App.git) link
+- `cd` into the directory
 ### Install ⚙️
 - Run `bundle install` && `npm install`
 
 ### Database 💾
-- Run `rails db:create` to create the database.
-- Run `rails db:migrate` to create the tables.
-- Run `rails db:seed` to populate the tables.
+- Run `rails db:create` to create the database
+- Run `rails db:migrate` to create the tables
 ### Usage 💻
-- Run `rails s` to start the server.
+- Run `rails s` to start the server
 
 - ## Authors
 
@@ -52,7 +56,7 @@ To get a local copy up and running follow these simple example steps.
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/mateo951/Recipe-App/issues).
+Feel free to check the [issues page](../../issues/).
 
 ## Show your support
 

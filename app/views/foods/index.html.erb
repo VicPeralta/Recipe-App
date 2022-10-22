@@ -1,5 +1,6 @@
-<%= link_to 'Add new food', new_food_path, :class => 'button float-right margin-bottom-bttn' %>
-<div class="clear margin-table">
+<h1 class="mt-2 text-center">Foods</h1>
+<%= link_to 'Add new food', new_food_path, :class => 'btn btn-sm float-end btn-primary mt-1 mb-4' %>
+<div class="margin-table">
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -14,8 +15,12 @@
         <tr>
         <td><%= food.name%></td>
         <td><%= food.measurementUnit%></td>
-        <td><%= food.price%></td>
-        <td><%= button_to "Delete", food, method: :delete, class: 'btn btn-primary' %></td>
+        <td><%= number_to_currency food.price%></td>
+        <td>
+          <%= link_to "Delete", food, 
+            data:{turbo_method: :delete, turbo_confirm: "Are you sure?"},
+            class:"btn btn-danger"%>
+        </td>
       </tr>
       <% end %>
     </tbody>

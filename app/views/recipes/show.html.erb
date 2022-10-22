@@ -1,109 +1,50 @@
-<h1 class='text-centered margin-botton-20'>
+<h1 class='text-center mb-3 mt-2'>
   <%=@recipe.name%>
 </h1>
-<div class='flex info-recipe space-between'>
-  <div class='left w-70'>
-    <p class='margin-botton-20 larger-font'>
-      Preparation time: <%=@recipe.preparationTime%> minutes
+<div class='d-flex info-recipe justify-content-between '>
+  <div class=''>
+    <p class='mb-3 fs-5 fw-bold'>
+      Preparation time: 
+      <span class="fw-normal"><%=@recipe.preparationTime%> minutes</span> 
     </p>
-    <p class='margin-botton-20 larger-font'>
-      Cooking time: <%=@recipe.cookingTime%> minutes
+    <p class='mb-3 fs-5 fw-bold'>
+      Cooking time: 
+      <span class="fw-normal"><%=@recipe.cookingTime%> minutes</span> 
     </p>
-    <p class='margin-botton-20 larger-font'>Steps go here ...</p>
+    <p class='mb-3 fs-5'>Steps go here ...</p>
   </div>
   <div class=''>
     <% if can? :manage, @recipe %>
-      <div class="switch-container">
-        <form action=<%=toggle_public_path(id:@recipe.id)%> data-remote="true" method="post">
-          <label>Public </label>
-          <label class="switch">
-            <input type="submit"  class=<%=@recipe.public ? 'public' : '' %>
-            />
-            <span class="slider"/>
-          </label>
-        </form>
-      </div>
+      <%= render partial:"shared/publicRecipe"%>
     <% end %>
   </div>
 </div>
-<script>
-  function myFunction(e) {
-    document.getElementById('changeIngredient').classList.toggle('collapse');
-    document.getElementById('recipe_food_id').value = e.target.dataset.ingredient;
-    document.getElementById('recipe_food_id').style.display = 'none';
-    document.getElementById('recipe_food_quantity').focus();
-  }
-</script>
-<div class='flex space-evenly w-100 margin-botton-20'>
+<div class='d-flex mb-4'>
   <% if can? :manage, @recipe %>
-    <%=button_to 'Generate shopping list', shopping_list_path,
+    <%=button_to 'Generate shopping list', shopping_list_index_path,
       method: :get,
-    class: 'btn primary-bg-color'%>
-    <button class='btn primary-bg-color' onclick="document.getElementById('addIngredient').classList.toggle('collapse')"
-      id='collapse-btn'>
-      Add ingredient
-    </button>
+    class: 'btn btn-primary btn-sm me-2'%>
+    <%= turbo_frame_tag "addIngredient" do%>
+      <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe), class: "btn btn-primary btn-sm"%>
+    <% end %>
   <%end%>
-</div>
-<div class='collapse margin-botton-10' id='addIngredient'>
-  <%= form_for(@ingredient, 
-    data: { turbo: false },
-    url: add_ingredient_path(id:@recipe.id)) do |f| %>
-    <%= f.label :food_id, "Food", class:"form-label" %>
-    <%= f.select :food_id, current_user.foods.map{|food| [food.name, food.id]}, required: true %>
-    <%= f.label :quantity, "Quantity", class:"form-label " %>
-    <%= f.number_field :quantity, required: true %>
-    <%= f.submit "Add ingredient", class: "btn success-bg-color" %>
-  <% end %>
-</div>
-<div class='collapse margin-botton-10' id='changeIngredient'>
-  <%= form_for(@ingredient, 
-    data: { turbo: false },
-    url: change_ingredient_path(recipe_id:@recipe.id)) do |f| %>
-    <div class="margin-botton-20">
-      <%= f.number_field :id, required: true, readonly: true %><br/>
-    </div>
-    <div class="margin-botton-20">
-      <%= f.label :quantity, "Quantity", class:"form-label " %>
-      <%= f.number_field :quantity, required: true %><br/>
-    </div>
-    <%= f.submit "Change quantity", class: "btn success-bg-color" %>
-  <% end %>
 </div>
 <hr>
 <div>
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th>Food</th>
-        <th>Quantity</th>
-        <th>Value</th>
+  <div>
+    <div class="d-flex border-bottom border-info mb-3">
+        <p style="flex:1" class="fw-bold">Food</p>
+        <p style="flex:1" class="fw-bold">Quantity</p>
+        <p style="flex:1" class="fw-bold"">Value</p>
         <% if can? :manage, @recipe %>
-          <th>Actions</th>
+          <p style="flex:1" class="fw-bold">Actions</p>
         <%end%>
-      </tr>
-    </thead>
-    <tbody>
-      <% @ingredients.each do |ingredient| %>
-        <tr>
-          <td><%= ingredient.food.name%></td>
-          <td> <%=ingredient.quantity%> <%= ingredient.food.measurementUnit%></td>
-          <td><%= number_to_currency ingredient.food.price * ingredient.quantity%></td>
-          <% if can? :manage, @recipe %>
-            <td class="action-column">
-              <button class="btn-small warning-bg-color margin-botton-5" data-ingredient=<%=ingredient.id%>
-          onclick="myFunction(event)">
-                Modify
-              </button>
-              <%= button_to "Delete", 
-          delete_ingredient_path(id:@recipe.id, ingredient: ingredient.id), 
-          method: :delete, 
-          class: 'btn-small danger-bg-color margin-botton-5'
-          %>
-            </td>
-          <%end%>
-        </tr>
+    </div>
+    <%= turbo_stream_from "ingredients"%>
+      <%= turbo_frame_tag "ingredients" do%>
+          <% @ingredients.each do |ingredient| %>
+            <%= render partial: "shared/ingredient", locals: {ingredient: ingredient}%>
+          <% end %>
       <% end %>
-    </tbody>
-  </table>
+  </div>
 </div>
