@@ -23,124 +23,28 @@
 *,
 *::before,
 *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
   font-family: Roboto, Arial, Helvetica, sans-serif;
 }
 
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul,
-li {
-  margin: 0;
-  padding: 0;
-  font-family: inherit;
-  color: inherit;
+.turbo-progress-bar {
+  height: 5px;
+  background-color: green;
 }
 
-.alert {
-  background-color: #dc3545;
-  color: white;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  padding: 4px;
-  margin: 10px;
+.flash {
+  position: fixed;
+  left: 10px;
+  animation: appear-then-fade 3s both;
 }
 
-.alert-pos {
-  width: 60%;
-  float: left;
-}
+@keyframes appear-then-fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
 
-.notice {
-  background-color: #17a2b8;
-  color: black;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  padding: 4px;
-  margin: 10px;
-}
-
-.flex {
-  display: flex;
-}
-
-.justify-content-sa {
-  justify-content: space-around;
-}
-
-.container {
-  width: 80%;
-  margin-inline: auto;
-}
-
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td,
-th {
-  border: 1px solid #ddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #ddd;
-}
-
-.button {
-  background-color: cadetblue; /* Green */
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.margin-bottom-bttn {
-  margin-bottom: 20px;
-}
-
-.float-right {
-  float: right;
-}
-
-.card {
-  border: 1px black solid;
-  padding: 10px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.main-text {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.align-text-center {
-  text-align: center;
-}
-
-.font-size-pr {
-  font-size: 20px;
-}
-
-@media (max-width: 500px) {
-  .container {
-    width: 95%;
+  5%,
+  60% {
+    opacity: 1;
   }
 }

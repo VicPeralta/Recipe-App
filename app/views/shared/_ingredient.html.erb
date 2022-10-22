@@ -1,0 +1,20 @@
+<div>
+  <turbo-frame id= <%= dom_id(ingredient)%> class="d-flex" >
+      <div style="flex:1"><%= ingredient.food.name%></div>
+      <div style="flex:1"> <%=ingredient.quantity%> <%= ingredient.food.measurementUnit%></div>
+      <div style="flex:1"><%= number_to_currency ingredient.food.price * ingredient.quantity%></div>
+      <% if can? :manage, ingredient.recipe %>
+        <div style="flex:1">
+          <%= link_to "Modify", 
+            edit_recipe_recipe_food_path(ingredient.recipe, ingredient),
+            class: 'btn btn-warning btn-sm m-1'
+          %>
+          <%= link_to "Delete", 
+            recipe_recipe_food_path(ingredient.recipe, ingredient),
+            data: { turbo_method: :delete, turbo_confirm: "Are you sure"},
+            class: 'btn btn-danger btn-sm m-1'
+          %>
+        </div>
+      <% end %>
+  </turbo-frame>
+</div>

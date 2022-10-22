@@ -1,0 +1,4 @@
+<%= turbo_stream.remove @ingredient do%>
+  <%= render partial: "shared/ingredient", locals: {ingredient: @ingredient}%>
+<% end %>
+<%= turbo_stream.prepend "flash", partial: "shared/flash" %>

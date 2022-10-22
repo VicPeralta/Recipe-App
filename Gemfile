@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '>= 3.0.3'
+ruby '>= 2.7'
 
 gem 'rubocop', '>= 1.0', '< 2.0'
 
@@ -35,7 +35,7 @@ gem 'jbuilder'
 gem 'devise'
 
 # Use Redis adapter to run Action Cable in production
-# gem "redis", "~> 4.0"
+gem 'redis', '~> 4.0'
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
