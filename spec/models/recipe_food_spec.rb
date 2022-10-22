@@ -23,10 +23,4 @@ RSpec.describe 'Recipe Food model', type: :request do
     expect(recipe_food).to be_invalid
     expect(recipe_food.errors[:quantity][0]).to be == "Quantity can't be null"
   end
-
-  # it 'Create an invalid inventory food due to quantity not provided' do
-  #   inventory_food = InventoryFood.new(food: @food, inventory: @inventory)
-  #   expect(inventory_food).to be_invalid
-  #   expect(inventory_food.errors[:quantity][0]).to be == "Quantity can't be null"
-  # end
 end
