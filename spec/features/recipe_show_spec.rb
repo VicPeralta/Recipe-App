@@ -55,12 +55,12 @@ RSpec.describe 'Recipe details page test', type: :feature do
   end
 
   it 'Clicking make private/make public button toggles the public attribute' do
-    click_button "Public"
+    click_button 'Public'
     recipe = Recipe.find(@public_recipe.id)
     expect(recipe.public).to be false
-    # click_button(id: 'public', wait: 5)
-    # recipe = Recipe.find(@public_recipe.id)
-    # expect(recipe.public).to be true
+    click_button 'Public'
+    recipe = Recipe.find(@public_recipe.id)
+    expect(recipe.public).to be true
   end
 
   it 'Clicking generate shopping list renders Shopping List page' do
