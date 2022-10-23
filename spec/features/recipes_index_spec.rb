@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Recipes page test', type: :feature do
   before :all do
-    @user ||= User.create(
+    @user = User.create(
       name: 'Victor',
       email: 'victorperaltagomez@gmail.com',
       password: '121212'
@@ -29,29 +29,27 @@ RSpec.describe 'Recipes page test', type: :feature do
     @user.destroy
   end
   before :each do
-    visit root_path
-    fill_in 'user_email', with: 'victorperaltagomez@gmail.com'
-    fill_in 'user_password', with: '121212'
-    click_button 'Log in'
+    sign_in @user
     visit recipes_path
   end
 
   it 'The Add new recipe button should be visible.' do
     expect(page.has_link?('Add new recipe')).to be true
   end
+
   it 'The recipes list should be visible' do
-    expect((page.has_link?(@public_recipe.name) &&
-            page.has_link?(@private_recipe.name))).to be true
+    expect(page).to have_selector('h3', text: @public_recipe.name) &&
+                    have_selector('h3', text: @private_recipe.name)
   end
+
   it "When click on a recipe, it redirects to that recipe's details page" do
-    find_link(href: recipe_path(id: @public_recipe.id)).click
+    find_link('See Details', href: recipe_path(id: @public_recipe.id)).click
     expect(page).to have_content("Preparation time: #{@public_recipe.preparationTime} minutes")
   end
-  it 'Recipe delete when click on a recipe remove button' do
-    expect((page.has_link?(@public_recipe.name) &&
-            page.has_link?(@private_recipe.name))).to be true
-    click_button('Remove', id: "recipe-#{@public_recipe.id}")
-    expect((page.has_link?(@public_recipe.name) &&
-            page.has_link?(@private_recipe.name))).to be false
+
+  it 'Delete recipe when click on remove button' do
+    expect(page.has_link?('See Details', href: recipe_path(@public_recipe.id))).to be true
+    find_link('Remove', href: recipe_path(id: @public_recipe.id)).click
+    expect(page.has_link?('See Details', href: recipe_path(@public_recipe.id))).to be false
   end
 end

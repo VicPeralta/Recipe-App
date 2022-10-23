@@ -25,10 +25,7 @@ RSpec.describe 'Public recipes page test', type: :feature do
     @user.destroy
   end
   before :each do
-    visit root_path
-    fill_in 'user_email', with: 'victorperaltagomez@gmail.com'
-    fill_in 'user_password', with: '121212'
-    click_button 'Log in'
+    sign_in @user
     visit root_path
   end
 
