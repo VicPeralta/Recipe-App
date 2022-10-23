@@ -1,8 +1,8 @@
 <turbo-frame id="toggle-public" class="switch-container">
-  <form action=<%=recipe_path(id:@recipe.id)%> data-remote="true" method="patch">
+  <form action=<%=toggle_recipe_path(id:@recipe.id)%> data-remote="true", method="post">
     <label>Public </label>
     <label class="switch">
-      <input type="submit"  class=<%=@recipe.public ? 'public' : '' %>
+      <input type="submit" value="Public" class=<%=@recipe.public ? 'public' : '' %>
             />
       <span class="slider"/>
     </label>
