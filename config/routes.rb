@@ -4,10 +4,7 @@ Rails.application.routes.draw do
   resources :public_recipes, only:[:index]
   resources :shopping_list, only: [:index]
   resources :users
-  resources :recipes, only: %i[index show new create destroy] do
-    member do
-      post 'toggle'
-    end
+  resources :recipes, only: %i[index show new create destroy update] do
     resources :recipe_foods, only: %i[new create destroy update edit] 
   end
   resources :foods, only: %i[index show new create destroy]

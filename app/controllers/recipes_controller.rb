@@ -39,14 +39,6 @@ class RecipesController < ApplicationController
     render 'recipes/status_changed'
   end
 
-  def toggle
-    @recipe = Recipe.find(params[:id])
-    @recipe.public = !@recipe.public
-    @recipe.save
-    @recipe.public
-    render 'recipes/status_changed'
-  end
-
   private
 
   def permitted_parameters_recipe
