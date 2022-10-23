@@ -1,10 +1,9 @@
-<turbo-frame id="toggle-public" class="switch-container">
-  <form action=<%=toggle_recipe_path(id:@recipe.id)%> data-remote="true", method="post">
-    <label>Public </label>
+<%= turbo_frame_tag "toggle-public", class:"switch-container" do %>
+  <%= form_with(model: @recipe) do |form|%>
+    <%= form.label "Public"%>
     <label class="switch">
-      <input type="submit" value="Public" class=<%=@recipe.public ? 'public' : '' %>
-            />
+      <%= form.submit "Public", class: @recipe.public ? "public" : ""%>
       <span class="slider"/>
     </label>
-  </form>
-</turbo-frame>
+  <% end %>
+<% end %>
